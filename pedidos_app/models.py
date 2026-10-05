@@ -49,3 +49,19 @@ class cliente(models.Model):
 
 #____________________________________________________________
 
+
+
+class pedido(models.Model):
+    fecha = models.DateTimeField(null=False)
+    pagado = models.BooleanField(null=False)
+
+
+    #1-N: un cliente realiza muchos pedidos
+    cliente = models.ForeignKey(cliente, on_delete=models.CASCADE) #FK con cliente
+
+    class Meta:
+        verbose_name_plural = "Pedidos"
+        ordering = ["fecha"]
+    
+    def __str__(self) -> str:
+        return f"Id de Cliente: {self.cliente} Fecha: {self.fecha} Pagado: {self.pagado}"
